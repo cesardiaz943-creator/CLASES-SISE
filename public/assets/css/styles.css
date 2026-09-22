@@ -112,6 +112,42 @@ h1 {
   }
 }
 
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1.5rem;
+  padding-block: 1rem 2rem;
+}
+
+.service-card {
+  min-width: 0;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}
+
+.service-card a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+
+.service-card--featured {
+  background: #0d1b2a;
+  color: white;
+}
+
+.service-card--featured :focus-visible {
+  outline-color: white;
+}
+
+@media (min-width: 768px) {
+  .service-card--featured {
+    grid-column: span 2;
+  }
+}
 /* TODO S3.3: navbar con Flexbox y menú mobile first.
    Añadir .js-menu .navbar__menu y .is-open según sección 4.
    Ampliar con min-width: 768px y 1024px. */
