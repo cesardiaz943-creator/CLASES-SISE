@@ -1,0 +1,122 @@
+/* BASE: conserva estas reglas y desarrolla las tareas de la guía. */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #0d1b2a;
+  background: #f5f7fa;
+}
+.container {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+.site-header {
+  background: #0d1b2a;
+  color: white;
+}
+.site-header :focus-visible {
+  outline-color: white;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+.navbar__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.navbar a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.25rem;
+}
+.js-menu .navbar__menu {
+  display: none;
+}
+.js-menu .navbar__menu.is-open {
+  display: flex;
+}
+button,
+.button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  background: #22c55e;
+  color: #0d1b2a;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+.hero {
+  padding-block: 2rem;
+}
+h1 {
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  line-height: 1.2;
+}
+.skip-link {
+  position: absolute;
+  top: -5rem;
+  left: 1rem;
+}
+.skip-link:focus {
+  top: 1rem;
+  padding: 1rem;
+  background: white;
+}
+@media (min-width: 768px) {
+  .navbar__menu,
+  .js-menu .navbar__menu {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+  }
+  .navbar__toggle {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .hero {
+    padding-block: 4rem;
+  }
+}
+
+/* TODO S3.3: navbar con Flexbox y menú mobile first.
+   Añadir .js-menu .navbar__menu y .is-open según sección 4.
+   Ampliar con min-width: 768px y 1024px. */
+/* TODO S3.4: hero y CTA de al menos 44px de alto. */
+/* TODO S4.1: catálogo con Grid y tarjeta destacada.
+   span 2 debe aplicarse solo desde 768px. */
+/* TODO S4.3: formulario, ayudas, estados y foco visible.
+   No ocultar errores con overflow-x: hidden. */

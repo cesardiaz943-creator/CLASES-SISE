@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portal TI | Proyecto base de la semana 2</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/ui.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <header class="site-header">
+      <!-- TODO S3.1: implementar el navbar de la sección 3 de la guía.
+           Mantener los selectores .navbar, .navbar__toggle y #nav-menu
+           para que funcione el apoyo ui.js. -->
+      <nav class="navbar container" aria-label="Navegación principal">
+        <a class="navbar__logo" href="#inicio">Portal TI</a>
+        <button
+          class="navbar__toggle"
+          type="button"
+          hidden
+          aria-controls="nav-menu"
+          aria-expanded="false"
+        >
+          Menú
+        </button>
+        <ul class="navbar__menu" id="nav-menu">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#soporte">Solicitar soporte</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="contenido" class="container" tabindex="-1">
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <h1 id="hero-title">Soporte TI para tu equipo</h1>
+        <p>Consulta nuestros servicios y describe tu incidencia.</p>
+        <a class="button" href="#soporte">Solicitar soporte</a>
+      </section>
+      <section id="servicios" aria-labelledby="services-title">
+        <h2 id="services-title">Servicios de soporte</h2>
+        <!-- TODO S4.1: cuatro article dentro de .services__grid.
+             Red, Prioritario, Hardware y Software. -->
+        <p>Catálogo pendiente de implementar.</p>
+      </section>
+      <section id="soporte" aria-labelledby="support-title">
+        <h2 id="support-title">Solicitud de soporte</h2>
+        <!-- TODO S4.2: agregar aquí el FORM de las secciones 7 y 8.
+             Ya existe el section: no dupliques el id soporte.
+             Usar #support-form, #submit-demo y #form-status.
+             El botón submit comienza disabled y ui.js lo habilita.
+             No usar novalidate. -->
+        <p>Formulario pendiente. Esta práctica solo utilizará datos ficticios.</p>
+      </section>
+    </main>
+    <footer class="container">
+      <p>Portal TI de práctica. No registra tickets reales.</p>
+    </footer>
+  </body>
+</html>
