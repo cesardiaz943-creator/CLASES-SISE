@@ -1,14 +1,25 @@
 /* BASE: conserva estas reglas y desarrolla las tareas de la guía. */
+:root {
+  --color-primary: #0d1b2a;
+  --color-background: #f5f7fa;
+  --color-accent: #22c55e;
+  --color-focus: #2563eb;
+  --color-border: #64748b;
+  --color-success: #15803d;
+  --color-error: #b91c1c;
+}
+
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  color: #0d1b2a;
-  background: #f5f7fa;
+  color: var(--color-primary);
+  background: var(--color-background);
 }
 .container {
   width: min(100% - 2rem, 1200px);
@@ -22,11 +33,11 @@ a {
   color: inherit;
 }
 :focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
 .site-header {
-  background: #0d1b2a;
+  background: var(--color-primary);
   color: white;
 }
 .site-header :focus-visible {
@@ -72,8 +83,8 @@ button,
 .button {
   display: inline-flex;
   align-items: center;
-  background: #22c55e;
-  color: #0d1b2a;
+  background: var(--color-accent);
+  color: var(--color-primary);
   border-radius: 0.5rem;
   text-decoration: none;
   font-weight: 600;
@@ -135,7 +146,7 @@ h1 {
 }
 
 .service-card--featured {
-  background: #0d1b2a;
+  background: var(--color-primary);
   color: white;
 }
 
@@ -162,7 +173,7 @@ fieldset {
   min-width: 0;
   margin: 0;
   padding: 1rem;
-  border: 1px solid #64748b;
+  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
 }
 
@@ -184,7 +195,7 @@ textarea {
   min-height: 44px;
   font: inherit;
   padding: 0.65rem;
-  border: 2px solid #64748b;
+  border: 2px solid var(--color-border);
   border-radius: 0.3rem;
 }
 
@@ -211,13 +222,13 @@ small {
 input:required:valid,
 select:required:valid,
 textarea:required:valid {
-  border-color: #15803d;
+  border-color: var(--color-success);
 }
 
 input:user-invalid,
 select:user-invalid,
 textarea:user-invalid {
-  border-color: #b91c1c;
+  border-color: var(--color-error);
 }
 
 .support-form:invalid .form-note {
@@ -228,11 +239,55 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
-/* TODO S3.3: navbar con Flexbox y menú mobile first.
-   Añadir .js-menu .navbar__menu y .is-open según sección 4.
-   Ampliar con min-width: 768px y 1024px. */
-/* TODO S3.4: hero y CTA de al menos 44px de alto. */
-/* TODO S4.1: catálogo con Grid y tarjeta destacada.
-   span 2 debe aplicarse solo desde 768px. */
-/* TODO S4.3: formulario, ayudas, estados y foco visible.
-   No ocultar errores con overflow-x: hidden. */
+#preguntas,
+#contacto {
+  padding-block: 2rem;
+}
+
+.faq-category {
+  margin-block: 1.5rem;
+}
+
+.faq-item {
+  margin-block: 1rem;
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+}
+
+.faq-item h4 {
+  margin-top: 0;
+}
+
+.faq-item p {
+  margin-bottom: 0;
+}
+
+#contacto {
+  margin-block: 1rem 2rem;
+  padding-inline: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+}
+
+#contacto address {
+  font-style: normal;
+}
+
+#contacto a {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+  #preguntas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  #preguntas > h2 {
+    grid-column: 1 / -1;
+  }
+}

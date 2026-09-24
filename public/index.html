@@ -3,18 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Portal TI | Proyecto base de la semana 2</title>
+    <title>Nova Servicios | Portal de Soporte TI</title>
+    <meta
+      name="description"
+      content="Portal de soporte TI de Nova Servicios para consultar servicios y validar solicitudes de asistencia técnica."
+    />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="assets/js/ui.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <header class="site-header">
-      <!-- TODO S3.1: implementar el navbar de la sección 3 de la guía.
-           Mantener los selectores .navbar, .navbar__toggle y #nav-menu
-           para que funcione el apoyo ui.js. -->
       <nav class="navbar container" aria-label="Navegación principal">
-        <a class="navbar__logo" href="#inicio">Portal TI</a>
+        <a class="navbar__logo" href="#inicio">Nova Servicios</a>
         <button
           class="navbar__toggle"
           type="button"
@@ -28,13 +30,18 @@
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#soporte">Solicitar soporte</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </header>
     <main id="contenido" class="container" tabindex="-1">
       <section class="hero" id="inicio" aria-labelledby="hero-title">
         <h1 id="hero-title">Soporte TI para tu equipo</h1>
-        <p>Consulta nuestros servicios y describe tu incidencia.</p>
+        <p>
+          Nova Servicios brinda asistencia técnica para resolver incidencias de red,
+          hardware, software y acceso.
+        </p>
         <a class="button" href="#soporte">Solicitar soporte</a>
       </section>
       <section id="servicios" aria-labelledby="services-title">
@@ -151,6 +158,83 @@
           <p id="form-status" role="status" aria-live="polite"></p>
           <noscript>Activa JavaScript para ejecutar la demostración.</noscript>
         </form>
+      </section>
+
+      <!-- AQUÍ EMPIEZA PREGUNTAS FRECUENTES -->
+
+      <section id="preguntas" aria-labelledby="faq-title">
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+
+        <div class="faq-category">
+          <h3>Solicitudes y atención</h3>
+
+          <article class="faq-item">
+            <h4>¿Cómo solicito soporte técnico?</h4>
+            <p>
+              Completa el formulario de solicitud indicando tus datos y una descripción
+              clara de la incidencia.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h4>¿Cómo elijo la prioridad de mi incidencia?</h4>
+            <p>
+              Selecciona prioridad alta si el problema impide continuar el trabajo, media
+              si afecta parcialmente tus actividades y baja si no requiere atención
+              inmediata.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h4>¿Cuánto demora la atención?</h4>
+            <p>
+              El tiempo de atención depende del tipo y prioridad de la incidencia. Este
+              portal es una demostración y no registra solicitudes reales.
+            </p>
+          </article>
+        </div>
+
+        <div class="faq-category">
+          <h3>Equipos y acceso</h3>
+
+          <article class="faq-item">
+            <h4>¿Qué información debo incluir sobre una falla de equipo?</h4>
+            <p>
+              Describe qué equipo presenta el problema, qué estabas haciendo cuando
+              ocurrió y cualquier mensaje de error que hayas observado.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h4>¿Debo escribir mi contraseña en la solicitud?</h4>
+            <p>
+              No. Nunca incluyas contraseñas ni información confidencial en la descripción
+              del problema.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- AQUÍ EMPIEZA CONTACTO -->
+
+      <section id="contacto" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contacto</h2>
+
+        <p>
+          Para consultas generales sobre los servicios de Nova Servicios puedes
+          comunicarte mediante los siguientes datos ficticios:
+        </p>
+
+        <address>
+          <p>
+            Correo:
+            <a href="mailto:soporte@novaservicios.test"> soporte@novaservicios.test </a>
+          </p>
+
+          <p>Teléfono: (076) 555-0100</p>
+
+          <p>Horario de atención: lunes a viernes, de 8:00 a. m. a 6:00 p. m.</p>
+        </address>
       </section>
     </main>
     <footer class="container">
