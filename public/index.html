@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nova Servicios | Portal de Soporte TI</title>
+    <meta
+      name="description"
+      content="Portal de soporte TI de Nova Servicios para consultar servicios y validar solicitudes de asistencia técnica."
+    />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/ui.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <header class="site-header">
+      <nav class="navbar container" aria-label="Navegación principal">
+        <a class="navbar__logo" href="#inicio">Nova Servicios</a>
+        <button
+          class="navbar__toggle"
+          type="button"
+          hidden
+          aria-controls="nav-menu"
+          aria-expanded="false"
+        >
+          Menú
+        </button>
+        <ul class="navbar__menu" id="nav-menu">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#soporte">Solicitar soporte</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="contenido" class="container" tabindex="-1">
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <h1 id="hero-title">Soporte TI para tu equipo</h1>
+        <p>
+          Nova Servicios brinda asistencia técnica para resolver incidencias de red,
+          hardware, software y acceso.
+        </p>
+        <a class="button" href="#soporte">Solicitar soporte</a>
+      </section>
+      <section id="servicios" aria-labelledby="services-title">
+        <h2 id="services-title">Servicios de soporte</h2>
+        <div class="services__grid">
+          <article class="service-card">
+            <h3>Soporte de red</h3>
+            <p>Diagnóstico de problemas de conectividad.</p>
+            <a href="#soporte">Solicitar soporte de red</a>
+          </article>
+
+          <article class="service-card service-card--featured">
+            <h3>Soporte prioritario</h3>
+            <p>Evaluación de incidencias que impiden continuar el trabajo.</p>
+            <a href="#soporte">Solicitar atención prioritaria</a>
+          </article>
+
+          <article class="service-card">
+            <h3>Soporte de hardware</h3>
+            <p>Revisión de fallas en los componentes físicos del equipo.</p>
+            <a href="#soporte">Solicitar soporte de hardware</a>
+          </article>
+
+          <article class="service-card">
+            <h3>Soporte de software</h3>
+            <p>Asistencia con problemas de instalación y funcionamiento de programas.</p>
+            <a href="#soporte">Solicitar soporte de software</a>
+          </article>
+        </div>
+      </section>
+      <section id="soporte" aria-labelledby="support-title">
+        <h2 id="support-title">Solicitud de soporte</h2>
+
+        <form class="support-form" id="support-form">
+          <p class="form-note">
+            Los campos con * son obligatorios. Esta demostración no envía ni almacena
+            solicitudes.
+          </p>
+
+          <fieldset>
+            <legend>Datos de contacto</legend>
+
+            <label for="nombre">Nombre completo *</label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              required
+              minlength="3"
+              autocomplete="name"
+              aria-describedby="nombre-help"
+            />
+            <small id="nombre-help">Escribe al menos 3 caracteres.</small>
+
+            <label for="email">Correo electrónico *</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              aria-describedby="email-help"
+            />
+            <small id="email-help">Para la práctica usa ana@example.test.</small>
+          </fieldset>
+
+          <fieldset>
+            <legend>Datos de la incidencia</legend>
+
+            <label for="tipo">Tipo de incidencia *</label>
+            <select id="tipo" name="tipo" required>
+              <option value="">Selecciona una opción</option>
+              <option value="red">Red</option>
+              <option value="hardware">Hardware</option>
+              <option value="software">Software</option>
+              <option value="acceso">Acceso</option>
+            </select>
+
+            <fieldset class="priority">
+              <legend>Prioridad *</legend>
+              <label>
+                <input type="radio" name="prioridad" value="alta" required />
+                Alta
+              </label>
+              <label>
+                <input type="radio" name="prioridad" value="media" />
+                Media
+              </label>
+              <label>
+                <input type="radio" name="prioridad" value="baja" />
+                Baja
+              </label>
+            </fieldset>
+
+            <label for="descripcion">Descripción del problema *</label>
+            <textarea
+              id="descripcion"
+              name="descripcion"
+              rows="5"
+              required
+              minlength="10"
+              maxlength="500"
+              aria-describedby="descripcion-help"
+            ></textarea>
+            <small id="descripcion-help">
+              De 10 a 500 caracteres. Describe el problema sin incluir contraseñas.
+            </small>
+          </fieldset>
+
+          <button id="submit-demo" type="submit" disabled>
+            Validar solicitud de prueba
+          </button>
+
+          <p id="form-status" role="status" aria-live="polite"></p>
+          <noscript>Activa JavaScript para ejecutar la demostración.</noscript>
+        </form>
+      </section>
+
+      <!-- AQUÍ EMPIEZA PREGUNTAS FRECUENTES -->
+
+      <section id="preguntas" aria-labelledby="faq-title">
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+
+        <div class="faq-category">
+          <h3>Solicitudes y atención</h3>
+
+          <article class="faq-item">
+            <h4>¿Cómo solicito soporte técnico?</h4>
+            <p>
+              Completa el formulario de solicitud indicando tus datos y una descripción
+              clara de la incidencia.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h4>¿Cómo elijo la prioridad de mi incidencia?</h4>
+            <p>
+              Selecciona prioridad alta si el problema impide continuar el trabajo, media
+              si afecta parcialmente tus actividades y baja si no requiere atención
+              inmediata.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h4>¿Cuánto demora la atención?</h4>
+            <p>
+              El tiempo de atención depende del tipo y prioridad de la incidencia. Este
+              portal es una demostración y no registra solicitudes reales.
+            </p>
+          </article>
+        </div>
+
+        <div class="faq-category">
+          <h3>Equipos y acceso</h3>
+
+          <article class="faq-item">
+            <h4>¿Qué información debo incluir sobre una falla de equipo?</h4>
+            <p>
+              Describe qué equipo presenta el problema, qué estabas haciendo cuando
+              ocurrió y cualquier mensaje de error que hayas observado.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h4>¿Debo escribir mi contraseña en la solicitud?</h4>
+            <p>
+              No. Nunca incluyas contraseñas ni información confidencial en la descripción
+              del problema.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- AQUÍ EMPIEZA CONTACTO -->
+
+      <section id="contacto" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contacto</h2>
+
+        <p>
+          Para consultas generales sobre los servicios de Nova Servicios puedes
+          comunicarte mediante los siguientes datos ficticios:
+        </p>
+
+        <address>
+          <p>
+            Correo:
+            <a href="mailto:soporte@novaservicios.test"> soporte@novaservicios.test </a>
+          </p>
+
+          <p>Teléfono: (076) 555-0100</p>
+
+          <p>Horario de atención: lunes a viernes, de 8:00 a. m. a 6:00 p. m.</p>
+        </address>
+      </section>
+    </main>
+    <footer class="container">
+      <p>Portal TI de práctica. No registra tickets reales.</p>
+    </footer>
+  </body>
+</html>
