@@ -1,35 +1,41 @@
-# Registro de pruebas
+# Registro de pruebas - Evaluación Parcial
 
-Resultados de las pruebas manuales realizadas por el estudiante.
+Resultados de las pruebas manuales realizadas sobre el Portal de Soporte TI de Nova Servicios.
 
-- Estudiante / equipo: Julio César Castrejón Díaz
-- Fecha y navegador: 22/09/2026 — Google Chrome
-- Rama: feature/formulario-soporte
-- Commit: Pendiente de registrar el commit del formulario
-- URL Preview: Pendiente de publicación y comprobación
+- Estudiante: Julio César Castrejón Díaz
+- Fecha: 30/09/2026
+- Navegador: Google Chrome
+- Rama: feature/parcial-portal
+- URL Preview: Pendiente de publicación
+- Commit final: Pendiente
 
-| ID  | Prueba                                   | Resultado esperado                                       | Resultado observado                                                                                                              | Estado y evidencia                                                        |
-| --- | ---------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| R1  | 320 px                                   | Sin scroll horizontal; menú operativo                    | Menú operativo; catálogo en una columna; formulario y controles sin desbordamiento horizontal.                                   | Aprobado y comprobación manual                                            |
-| R2  | 768 px                                   | Nav horizontal y Grid adaptado                           | Navegación horizontal, botón Menú oculto y Grid de dos columnas; tarjeta prioritaria ocupa ambas. Formulario sin desbordamiento. | Aprobado y comprobación manual                                            |
-| R3  | 1024 px                                  | Contenido centrado y tres columnas con el CSS de la guía | Grid de tres columnas; Red ocupa una y prioritario dos en la primera fila. Formulario sin desbordamiento                         | Aprobado                                                                  |
-| R4  | Zoom 200 %                               | Texto y controles utilizables                            | Etiquetas, campos y botón legibles y utilizables al 200 %.                                                                       | Aprobado                                                                  |
-| A1  | Tab y Shift+Tab                          | Orden lógico y foco visible                              | Navegación hacia delante y atrás por el formulario con orden lógico y foco visible                                               | Falta documentar el recorrido completo por todos los enlaces de la página |
-| A2  | Enter, Espacio y Escape                  | Acciones correctas y cierre del menú                     | Menú abre con Enter y cierra con Escape. El botón del formulario funciona con Enter y Espacio.                                   | Parcial                                                                   |
-| A3  | Radios con flechas                       | Selección única de prioridad                             | Las flechas cambian entre Alta, Media y Baja; solo queda una opción marcada.                                                     | Aprobado                                                                  |
-| F1  | Campos vacíos                            | No permite confirmar                                     | El navegador bloquea la confirmación y solicita completar Nombre completo.                                                       | Aprobado                                                                  |
-| F2  | Nombre de 2 caracteres                   | Se rechaza                                               | El nombre Al se rechaza y se solicitan al menos 3 caracteres.                                                                    | Aprobado                                                                  |
-| F3  | Correo usuario@                          | Se rechaza                                               | El navegador rechaza el correo incompleto y solicita corregirlo.                                                                 | Aprobado                                                                  |
-| F4  | Sin tipo o prioridad                     | Se solicita completar                                    | Se probaron ambos casos por separado; se exige seleccionar el tipo y la prioridad.                                               | Aprobado                                                                  |
-| F5  | Descripción de 9 caracteres y más de 500 | Respeta mínimo y máximo                                  | Se rechazan 9 caracteres y se limita la entrada a 500 caracteres.                                                                | Aprobado                                                                  |
-| F6  | Datos ficticios válidos                  | Confirma sin enviar ni guardar                           | Aparece “Validación completada. No se envió ni guardó ningún ticket.” El mensaje desaparece al modificar un campo.               | Aprobado                                                                  |
-| P1  | Preview del PR                           | Accesible al revisor y mismo commit                      | Pendiente de publicar y comprobar el Preview del formulario.                                                                     | Pendiente.                                                                |
+| ID  | Prueba                 | Resultado esperado                                      | Resultado observado                                                                                                   | Estado                                                                                   |
+| --- | ---------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------ |
+| P01 | Responsive 320 px      | Sin scroll horizontal y contenido utilizable            | Portal y tabla de estados visibles en 320 px sin desbordamiento general                                               | Cumple                                                                                   |
+|     | P02                    | Responsive 768 px                                       | Diseño adaptado a tablet                                                                                              | Tabla de estados completa, FAQ en dos columnas y contenido sin desbordamiento horizontal | Cumple |
+| P03 | Responsive 1440 px     | Distribución correcta en escritorio                     | Contenido centrado, tabla completa y distribución legible en escritorio                                               | Cumple                                                                                   |
+| P04 | Formulario inválido    | La validación nativa impide confirmar datos incorrectos | El navegador bloquea el envío y muestra los mensajes de validación correspondientes                                   | Cumple                                                                                   |
+| P05 | Formulario válido      | Muestra confirmación de simulación                      | El formulario acepta los datos válidos y muestra el mensaje de confirmación sin guardar información                   | Cumple                                                                                   |
+| P06 | Navegación por teclado | Tab y Shift+Tab recorren controles con foco visible     | El recorrido con Tab y Shift+Tab mantiene un orden lógico y el foco es visible en los elementos interactivos          | Cumple                                                                                   |
+| P07 | Zoom 200 %             | El contenido permanece utilizable                       | Al 200 % el contenido, formulario, navegación y controles continúan visibles y utilizables sin pérdida de información | Cumple                                                                                   |
+| P08 | Preview accesible      | La URL carga correctamente en navegador privado         | El Preview carga correctamente en una ventana privada y muestra la versión actual del portal                          | Cumple                                                                                   |
 
-Datos de prueba: Ana Prueba, ana@example.test, Red, Media y "No funciona la conexión de prueba".
+## Correcciones realizadas
 
-## Correcciones
+### Corrección 1 - Tabla de estados en 320 px
 
-No se reportaron fallos en las pruebas del formulario.
+**Problema detectado:**  
+En la vista de 320 px la tabla de estados comprimía demasiado el contenido y la palabra "Pendiente" se dividía de forma incorrecta.
 
-Observación del entorno local: la consola mostró un error 404 al solicitar
-favicon.ico. No impidió las pruebas del catálogo ni del formulario.
+**Corrección aplicada:**  
+Se ajustaron el tamaño de fuente, el espaciado de las celdas y las reglas de corte de palabras dentro de la media query para dispositivos pequeños.
+
+**Resultado:**  
+Las cuatro columnas de la tabla permanecen visibles y los estados se muestran de forma más legible en 320 px.
+
+**Evidencia:**  
+Captura antes y después de la corrección.
+
+### Corrección 2
+
+Pendiente de registrar después de identificar y corregir un segundo problema real durante las pruebas.
