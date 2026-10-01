@@ -154,12 +154,6 @@ h1 {
   outline-color: white;
 }
 
-@media (min-width: 768px) {
-  .service-card--featured {
-    grid-column: span 2;
-  }
-}
-
 .support-form {
   display: grid;
   gap: 1.25rem;
