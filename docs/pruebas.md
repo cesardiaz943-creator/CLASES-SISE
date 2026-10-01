@@ -36,6 +36,17 @@ Las cuatro columnas de la tabla permanecen visibles y los estados se muestran de
 **Evidencia:**  
 Captura antes y después de la corrección.
 
-### Corrección 2
+### Corrección 2 - Catálogo de servicios en 1440 px
 
-Pendiente de registrar después de identificar y corregir un segundo problema real durante las pruebas.
+**Problema detectado:**  
+En la vista de 1440 px, la tarjeta "Soporte prioritario" ocupaba dos columnas y provocaba que la tarjeta "Soporte de software" bajara a una segunda fila.
+
+**Código anterior:**
+
+```css
+@media (min-width: 768px) {
+  .service-card--featured {
+    grid-column: span 2;
+  }
+}
+```
