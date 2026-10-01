@@ -112,25 +112,29 @@ Incluye las preguntas frecuentes organizadas en dos categorías, los datos ficti
 
 ### Usuario
 
-Representa a la persona que utiliza el portal para crear o gestionar solicitudes de soporte.
+Representa a la persona que crea o gestiona solicitudes dentro del sistema.
 
 Atributos principales:
 
-- Nombre
-- Correo
-- Rol
-- Estado activo
+- id
+- nombre
+- correo
+- rol
+- activo
+
+El rol permite diferenciar entre solicitantes y técnicos.
 
 ### Servicio
 
-Representa los tipos de soporte disponibles dentro del portal.
+Representa los tipos de soporte disponibles dentro del catálogo.
 
 Atributos principales:
 
-- Nombre
-- Descripción
-- Categoría
-- Estado activo
+- id
+- nombre
+- descripción
+- categoría
+- activo
 
 ### Solicitud
 
@@ -138,31 +142,214 @@ Representa una incidencia reportada por un usuario.
 
 Atributos principales:
 
-- Título
-- Descripción
-- Prioridad
-- Estado
-- Fecha de creación
-- Fecha de actualización
+- id
+- título
+- descripción
+- prioridad
+- estado
+- fecha_creación
+- fecha_actualización
+
+Cada solicitud pertenece a un usuario y está asociada a un servicio.
 
 ### Actualización
 
-Representa los cambios o comentarios realizados durante la atención de una solicitud.
+Representa cada cambio de estado o comentario realizado durante la atención de una solicitud.
 
 Atributos principales:
 
-- Estado anterior
-- Estado nuevo
-- Comentario
-- Fecha
+- id
+- solicitud_id
+- usuario_id
+- estado_anterior
+- estado_nuevo
+- comentario
+- fecha
 
 ### Auditoría
 
-Representa el registro de las acciones realizadas dentro del sistema.
+Representa la trazabilidad de las acciones realizadas dentro del sistema.
 
 Atributos principales:
 
-- Acción
-- Entidad afectada
-- Fecha
-- Detalle
+- id
+- usuario_id
+- acción
+- entidad
+- entidad_id
+- fecha
+- detalle_json
+
+La auditoría permite registrar quién realizó una acción, qué acción realizó, cuándo ocurrió y sobre qué elemento del sistema.
+
+## 6. Claves primarias y foráneas
+
+### Usuario
+
+**Clave primaria (PK):**
+
+- usuario_id
+
+No posee claves foráneas.
+
+### Servicio
+
+**Clave primaria (PK):**
+
+- servicio_id
+
+No posee claves foráneas.
+
+### Solicitud
+
+**Clave primaria (PK):**
+
+- solicitud_id
+
+**Claves foráneas (FK):**
+
+- usuario_id → Usuario
+- servicio_id → Servicio
+
+Estas claves permiten identificar qué usuario creó la solicitud y qué tipo de servicio necesita.
+
+### Actualización
+
+**Clave primaria (PK):**
+
+- actualizacion_id
+
+**Claves foráneas (FK):**
+
+- solicitud_id → Solicitud
+- usuario_id → Usuario
+
+Estas claves permiten identificar la solicitud modificada y el usuario responsable de realizar la actualización.
+
+### Auditoría
+
+**Clave primaria (PK):**
+
+- auditoria_id
+
+**Clave foránea (FK):**
+
+- usuario_id → Usuario
+
+Permite identificar al usuario que realizó cada acción registrada en la auditoría.
+
+## 7. Cardinalidades del modelo
+
+### Usuario (1) → (N) Solicitud
+
+Un usuario puede crear muchas solicitudes.
+
+Cada solicitud pertenece a un único usuario.
+
+### Servicio (1) → (N) Solicitud
+
+Un servicio puede estar asociado a muchas solicitudes.
+
+Cada solicitud corresponde a un tipo de servicio.
+
+### Solicitud (1) → (N) Actualización
+
+Una solicitud puede tener muchas actualizaciones durante su ciclo de vida.
+
+Cada actualización pertenece a una única solicitud.
+
+### Usuario (1) → (N) Auditoría
+
+Un usuario puede generar varios registros de auditoría.
+
+Cada registro de auditoría está asociado al usuario que realizó la acción.
+
+## 8. Estados y reglas de negocio
+
+Los estados considerados para una solicitud son:
+
+- Pendiente.
+- En proceso.
+- Resuelto.
+- Cerrado.
+- Cancelado.
+
+### Regla para cambios de estado
+
+Solo un usuario cuyo rol sea técnico puede cambiar el estado de una solicitud.
+
+Cuando se realiza un cambio de estado deben generarse dos registros:
+
+1. Un registro en Actualización.
+2. Un registro en Auditoría.
+
+De esta manera se conserva la trazabilidad de los cambios realizados sobre cada solicitud.
+
+### Regla de auditoría
+
+La auditoría debe registrar las acciones relevantes realizadas dentro del sistema.
+
+Cada registro debe permitir identificar:
+
+- Quién realizó la acción.
+- Qué acción se realizó.
+- Sobre qué entidad se realizó.
+- Cuándo ocurrió.
+- Información adicional relacionada con el cambio.
+
+Esto permite reconstruir posteriormente el historial de una solicitud y determinar quién realizó cada modificación.
+
+## 9. Caso de análisis - Solicitudes duplicadas 1001 y 1005
+
+Las solicitudes 1001 y 1005 corresponden al mismo incidente enviado dos veces por Ana R. debido a que no recibió confirmación después del primer envío.
+
+Para identificar un posible duplicado se pueden comparar los siguientes datos:
+
+- usuario_id
+- fecha_creación
+- descripción
+
+Si dos solicitudes pertenecen al mismo usuario, tienen una descripción igual o muy similar y fueron creadas en fechas cercanas, pueden identificarse como posibles duplicados.
+
+El registro de auditoría permite conservar evidencia de las acciones realizadas posteriormente sobre estas solicitudes y mantener la trazabilidad del proceso.
+
+Sin un mecanismo de trazabilidad sería más difícil determinar qué ocurrió con cada solicitud y por qué existen dos registros similares.
+
+## 10. Caso de análisis - Cambio de prioridad de la solicitud 1002
+
+La solicitud 1002 tenía originalmente prioridad **Media**.
+
+Posteriormente su prioridad fue modificada a **Alta** sin que el solicitante hubiera pedido ese cambio.
+
+Sin un registro de auditoría sería difícil identificar quién realizó la modificación y en qué momento ocurrió.
+
+Según el caso presentado en la guía, la auditoría registra los siguientes datos:
+
+- auditoria_id: 5004
+- usuario_id: 9
+- acción: CAMBIO_PRIORIDAD
+- fecha: 2026-09-30 14:32
+
+Con esta información es posible identificar al usuario responsable de la modificación, la acción realizada y el momento exacto en que ocurrió.
+
+El registro de auditoría permite investigar el cambio no autorizado y conservar evidencia de lo sucedido.
+
+## 11. Importancia de la trazabilidad
+
+La trazabilidad permite reconstruir el ciclo de vida de una solicitud desde su creación hasta su cierre.
+
+Sin trazabilidad pueden presentarse problemas como:
+
+- Conflictos difíciles de resolver.
+- Pérdida de confianza.
+- Dificultad para detectar errores.
+- Falta de responsabilidad sobre los cambios realizados.
+- Imposibilidad de reconstruir el historial de una solicitud.
+
+Con un sistema de auditoría es posible:
+
+- Identificar quién realizó cada acción.
+- Detectar patrones o modificaciones incorrectas.
+- Analizar problemas ocurridos durante el proceso.
+- Mantener evidencia de los cambios.
+- Mejorar continuamente el proceso de soporte.
