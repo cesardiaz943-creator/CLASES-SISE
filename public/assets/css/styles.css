@@ -309,7 +309,7 @@ button:disabled {
   }
 }
 
-#estado {
+#solicitudes {
   padding-block: 2rem;
 }
 
@@ -384,4 +384,12 @@ th {
   .service-card:focus-within {
     transform: none;
   }
+}
+
+#panel-ayuda:not([hidden]) {
+  animation: confirmar 250ms ease-out;
+}
+
+[hidden] {
+  display: none !important;
 }

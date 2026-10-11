@@ -82,3 +82,29 @@ JSON utiliza una sintaxis estricta. No permite colocar una coma después de la �
 ### ¿Por qué cargar con fetch requiere un servidor?
 
 fetch carga recursos mediante HTTP. Por eso el proyecto debe ejecutarse desde un servidor local, como el que iniciamos con npm run dev, y no directamente mediante file://.
+
+## Punto de control - Sesión 9
+
+### querySelector
+
+Se usa para seleccionar un elemento del DOM. Por ejemplo:
+`const catalogo = document.querySelector('#catalogo');`
+
+### createElement
+
+Se usa para crear nuevos elementos HTML desde JavaScript. Por ejemplo:
+`const tarjeta = document.createElement('article');`
+
+### textContent
+
+Se usa para colocar texto de forma segura dentro de un elemento. Por ejemplo:
+`titulo.textContent = s.nombre;`
+
+### classList
+
+Se usa para agregar o modificar clases CSS de un elemento. Por ejemplo:
+`tarjeta.classList.add('service-card');`
+
+## Limitación de las solicitudes en memoria
+
+Las solicitudes de práctica se almacenan únicamente en memoria mientras la página permanece abierta. Al recargar el navegador, la lista de solicitudes se elimina y la numeración vuelve a comenzar desde SOL-0001.

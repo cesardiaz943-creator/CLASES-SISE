@@ -30,7 +30,7 @@
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#soporte">Solicitar soporte</a></li>
-          <li><a href="#estado">Estado</a></li>
+          <li><a href="#solicitudes">Estado</a></li>
           <li><a href="#preguntas">Preguntas frecuentes</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -54,6 +54,19 @@
       <section id="soporte" aria-labelledby="support-title">
         <h2 id="support-title">Solicitud de soporte</h2>
 
+        <button
+          id="boton-ayuda"
+          type="button"
+          aria-expanded="false"
+          aria-controls="panel-ayuda"
+        >
+          ¿Necesitas ayuda?
+        </button>
+
+        <div id="panel-ayuda" hidden>
+          <p>Elige el servicio y describe qué ocurrió. Usa datos ficticios.</p>
+        </div>
+
         <form class="support-form" id="form-incidencia">
           <p class="form-note">
             Los campos con * son obligatorios. Esta demostración no envía ni almacena
@@ -71,9 +84,10 @@
               required
               minlength="3"
               autocomplete="name"
-              aria-describedby="nombre-help"
+              aria-describedby="nombre-help error-nombre"
             />
             <small id="nombre-help">Escribe al menos 3 caracteres.</small>
+            <p id="error-nombre" role="alert"></p>
 
             <label for="correo">Correo electrónico *</label>
             <input
@@ -82,38 +96,45 @@
               type="email"
               required
               autocomplete="email"
-              aria-describedby="email-help"
+              aria-describedby="email-help error-correo"
             />
             <small id="email-help">Para la práctica usa ana@example.test.</small>
+            <p id="error-correo" role="alert"></p>
           </fieldset>
 
           <fieldset>
             <legend>Datos de la incidencia</legend>
 
             <label for="servicio">Tipo de incidencia *</label>
-
-            <select id="servicio" name="servicio" required>
-              <option value="">Selecciona una opción</option>
-              <option value="red">Red</option>
-              <option value="hardware">Hardware</option>
-              <option value="software">Software</option>
-              <option value="acceso">Acceso</option>
+            <select
+              id="servicio"
+              name="servicio"
+              required
+              aria-describedby="error-servicio"
+            >
+              <option value="">Selecciona un servicio</option>
             </select>
+            <p id="error-servicio" role="alert"></p>
 
-            <fieldset class="priority">
+            <fieldset class="priority" aria-describedby="error-prioridad">
               <legend>Prioridad *</legend>
+
               <label>
                 <input type="radio" name="prioridad" value="alta" required />
                 Alta
               </label>
+
               <label>
                 <input type="radio" name="prioridad" value="media" />
                 Media
               </label>
+
               <label>
                 <input type="radio" name="prioridad" value="baja" />
                 Baja
               </label>
+
+              <p id="error-prioridad" role="alert"></p>
             </fieldset>
 
             <label for="descripcion">Descripción del problema *</label>
@@ -124,73 +145,44 @@
               required
               minlength="10"
               maxlength="500"
-              aria-describedby="descripcion-help"
+              aria-describedby="descripcion-help error-descripcion contador"
             ></textarea>
+
             <small id="descripcion-help">
               De 10 a 500 caracteres. Describe el problema sin incluir contraseñas.
             </small>
+
+            <p id="contador">0/500 caracteres</p>
+            <p id="error-descripcion" role="alert"></p>
           </fieldset>
 
-          <button id="submit-demo" type="submit" disabled>
-            Validar solicitud de prueba
-          </button>
+          <button id="enviar" type="submit">Validar solicitud de prueba</button>
 
-          <p id="form-status" role="status" aria-live="polite"></p>
+          <p id="estado" role="status" aria-live="polite"></p>
+
           <noscript>Activa JavaScript para ejecutar la demostración.</noscript>
         </form>
       </section>
 
-      <section id="estado" aria-labelledby="estado-title">
-        <h2 id="estado-title">Estado de solicitudes</h2>
-
-        <p>
-          Consulta algunos ejemplos ficticios del estado de las solicitudes de soporte.
-        </p>
+      <section id="solicitudes" aria-labelledby="solicitudes-title">
+        <h2 id="solicitudes-title">Solicitudes de práctica</h2>
 
         <div class="table-wrapper">
           <table>
             <caption>
-              Solicitudes de soporte de ejemplo
+              Solicitudes registradas durante esta sesión
             </caption>
 
             <thead>
               <tr>
-                <th scope="col">Solicitud</th>
+                <th scope="col">Código</th>
                 <th scope="col">Servicio</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Estado</th>
               </tr>
             </thead>
 
-            <tbody>
-              <tr>
-                <td>1001</td>
-                <td>Software</td>
-                <td>Alta</td>
-                <td>En proceso</td>
-              </tr>
-
-              <tr>
-                <td>1002</td>
-                <td>Hardware</td>
-                <td>Media</td>
-                <td>Pendiente</td>
-              </tr>
-
-              <tr>
-                <td>1003</td>
-                <td>Red</td>
-                <td>Alta</td>
-                <td>Resuelto</td>
-              </tr>
-
-              <tr>
-                <td>1004</td>
-                <td>Accesos</td>
-                <td>Baja</td>
-                <td>Pendiente</td>
-              </tr>
-            </tbody>
+            <tbody id="filas-solicitudes"></tbody>
           </table>
         </div>
       </section>
@@ -276,5 +268,6 @@
       <p>Portal TI de práctica. No registra tickets reales.</p>
     </footer>
     <script type="module" src="assets/js/catalogo.js"></script>
+    <script src="assets/js/interaccion.js" defer></script>
   </body>
 </html>
