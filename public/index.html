@@ -47,36 +47,14 @@
       </section>
       <section id="servicios" aria-labelledby="services-title">
         <h2 id="services-title">Servicios de soporte</h2>
-        <div class="services__grid">
-          <article class="service-card">
-            <h3>Soporte de red</h3>
-            <p>Diagnóstico de problemas de conectividad.</p>
-            <a href="#soporte">Solicitar soporte de red</a>
-          </article>
 
-          <article class="service-card service-card--featured">
-            <h3>Soporte prioritario</h3>
-            <p>Evaluación de incidencias que impiden continuar el trabajo.</p>
-            <a href="#soporte">Solicitar atención prioritaria</a>
-          </article>
-
-          <article class="service-card">
-            <h3>Soporte de hardware</h3>
-            <p>Revisión de fallas en los componentes físicos del equipo.</p>
-            <a href="#soporte">Solicitar soporte de hardware</a>
-          </article>
-
-          <article class="service-card">
-            <h3>Soporte de software</h3>
-            <p>Asistencia con problemas de instalación y funcionamiento de programas.</p>
-            <a href="#soporte">Solicitar soporte de software</a>
-          </article>
-        </div>
+        <div id="catalogo" class="services__grid"></div>
+        <p id="estado-catalogo" role="status" aria-live="polite"></p>
       </section>
       <section id="soporte" aria-labelledby="support-title">
         <h2 id="support-title">Solicitud de soporte</h2>
 
-        <form class="support-form" id="support-form">
+        <form class="support-form" id="form-incidencia">
           <p class="form-note">
             Los campos con * son obligatorios. Esta demostración no envía ni almacena
             solicitudes.
@@ -97,10 +75,10 @@
             />
             <small id="nombre-help">Escribe al menos 3 caracteres.</small>
 
-            <label for="email">Correo electrónico *</label>
+            <label for="correo">Correo electrónico *</label>
             <input
-              id="email"
-              name="email"
+              id="correo"
+              name="correo"
               type="email"
               required
               autocomplete="email"
@@ -112,8 +90,9 @@
           <fieldset>
             <legend>Datos de la incidencia</legend>
 
-            <label for="tipo">Tipo de incidencia *</label>
-            <select id="tipo" name="tipo" required>
+            <label for="servicio">Tipo de incidencia *</label>
+
+            <select id="servicio" name="servicio" required>
               <option value="">Selecciona una opción</option>
               <option value="red">Red</option>
               <option value="hardware">Hardware</option>
@@ -296,5 +275,6 @@
     <footer class="container">
       <p>Portal TI de práctica. No registra tickets reales.</p>
     </footer>
+    <script type="module" src="assets/js/catalogo.js"></script>
   </body>
 </html>

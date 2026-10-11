@@ -20,19 +20,3 @@ if (nav && toggle && menu) {
     }
   });
 }
-
-const form = document.querySelector('#support-form');
-const submit = document.querySelector('#submit-demo');
-const status = document.querySelector('#form-status');
-if (form && submit && status) {
-  form.addEventListener('input', () => {
-    status.textContent = '';
-  });
-  form.addEventListener('submit', (event) => {
-    // La validación nativa ocurre ANTES de submit. No usar novalidate.
-    event.preventDefault();
-    status.textContent = 'Validación completada. No se envió ni guardó ningún ticket.';
-  });
-  // Permanece deshabilitado si el apoyo no ha cargado.
-  submit.disabled = false;
-}
