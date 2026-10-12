@@ -5,7 +5,7 @@
 - Rama: feature/catalogo-dinamico
 - Entorno: Servidor local con npm run dev
 - URL local: http://127.0.0.1:5500
-- SHA probado: 187c59c
+- SHA probado: be9c68a
 - Anchos de prueba: 320 px, 768 px y 1440 px; zoom 200 %
 
 | ID  | Acción                                    | Resultado esperado                                            | Resultado real                                                                                                                                           | Corrección                                                 | Estado       | Evidencia                         |
