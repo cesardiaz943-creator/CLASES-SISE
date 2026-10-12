@@ -108,3 +108,25 @@ Se usa para agregar o modificar clases CSS de un elemento. Por ejemplo:
 ## Limitación de las solicitudes en memoria
 
 Las solicitudes de práctica se almacenan únicamente en memoria mientras la página permanece abierta. Al recargar el navegador, la lista de solicitudes se elimina y la numeración vuelve a comenzar desde SOL-0001.
+
+## Reflexión y transferencia
+
+### ¿Qué evitó duplicar los servicios?
+
+Usar una única fuente de datos en `servicios.json` evitó duplicar la información. El catálogo y el selector del formulario se generan a partir del mismo archivo JSON.
+
+### ¿Por qué textContent es adecuado para datos externos?
+
+`textContent` permite mostrar datos externos como texto literal sin interpretarlos como HTML. Esto ayuda a evitar que contenido malicioso cree elementos o ejecute código en la página.
+
+### ¿Cómo detectaste un envío duplicado?
+
+Se detectó intentando enviar varias veces durante el tiempo de procesamiento. La variable `procesando` impide que se registre más de una solicitud mientras una anterior todavía está en curso.
+
+### ¿Qué parte reemplazarías para persistir en una API?
+
+Se reemplazaría el almacenamiento temporal en el arreglo `solicitudes` por una petición a una API que guarde los datos en una base de datos persistente.
+
+### ¿Qué corrección realizarás antes de la EA2 del 14 de octubre?
+
+Antes de la EA2 revisaré nuevamente las pruebas de accesibilidad, validación, responsive y funcionamiento del Preview para corregir cualquier problema pendiente.
