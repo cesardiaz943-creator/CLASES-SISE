@@ -52,3 +52,81 @@ Desde la carpeta raíz del proyecto ejecutar:
 npm ci
 npm run dev
 ```
+
+## Preguntas de inicio
+
+### ¿Qué partes del portal repiten información de los servicios?
+
+El catálogo de servicios y el selector del formulario repiten información sobre los servicios disponibles. Por eso la guía propone usar una sola fuente JSON para que ambos se actualicen con los mismos datos.
+
+### ¿Cómo se relaciona servicio_id con el modelo de la semana 4?
+
+servicio_id identifica el servicio elegido dentro de una solicitud. Se relaciona con el id de cada servicio y permite asociar una solicitud con un servicio específico.
+
+### ¿Qué diferencia existe entre validar un formulario, simular una solicitud y guardarla en una base de datos?
+
+Validar un formulario significa comprobar que los datos ingresados sean correctos. Simular una solicitud significa procesarla solo de manera temporal dentro de la página. Guardarla en una base de datos significa almacenarla de forma persistente para que no se pierda al recargar.
+
+## Actividad de comprensión - Fuente única de servicios
+
+### Recorrido de los datos
+
+Los servicios se almacenan en el archivo JSON. La función cargarServicios obtiene esos datos, luego crearTarjeta genera las tarjetas del catálogo y también se crean las opciones del selector. Finalmente, estos elementos se incorporan al DOM de la página.
+
+JSON → cargarServicios → crearTarjeta y opciones → DOM
+
+### ¿Por qué una coma final rompe JSON?
+
+JSON utiliza una sintaxis estricta. No permite colocar una coma después de la última propiedad de un objeto ni después del último elemento de un arreglo, porque el archivo deja de ser un JSON válido.
+
+### ¿Por qué cargar con fetch requiere un servidor?
+
+fetch carga recursos mediante HTTP. Por eso el proyecto debe ejecutarse desde un servidor local, como el que iniciamos con npm run dev, y no directamente mediante file://.
+
+## Punto de control - Sesión 9
+
+### querySelector
+
+Se usa para seleccionar un elemento del DOM. Por ejemplo:
+`const catalogo = document.querySelector('#catalogo');`
+
+### createElement
+
+Se usa para crear nuevos elementos HTML desde JavaScript. Por ejemplo:
+`const tarjeta = document.createElement('article');`
+
+### textContent
+
+Se usa para colocar texto de forma segura dentro de un elemento. Por ejemplo:
+`titulo.textContent = s.nombre;`
+
+### classList
+
+Se usa para agregar o modificar clases CSS de un elemento. Por ejemplo:
+`tarjeta.classList.add('service-card');`
+
+## Limitación de las solicitudes en memoria
+
+Las solicitudes de práctica se almacenan únicamente en memoria mientras la página permanece abierta. Al recargar el navegador, la lista de solicitudes se elimina y la numeración vuelve a comenzar desde SOL-0001.
+
+## Reflexión y transferencia
+
+### ¿Qué evitó duplicar los servicios?
+
+Usar una única fuente de datos en `servicios.json` evitó duplicar la información. El catálogo y el selector del formulario se generan a partir del mismo archivo JSON.
+
+### ¿Por qué textContent es adecuado para datos externos?
+
+`textContent` permite mostrar datos externos como texto literal sin interpretarlos como HTML. Esto ayuda a evitar que contenido malicioso cree elementos o ejecute código en la página.
+
+### ¿Cómo detectaste un envío duplicado?
+
+Se detectó intentando enviar varias veces durante el tiempo de procesamiento. La variable `procesando` impide que se registre más de una solicitud mientras una anterior todavía está en curso.
+
+### ¿Qué parte reemplazarías para persistir en una API?
+
+Se reemplazaría el almacenamiento temporal en el arreglo `solicitudes` por una petición a una API que guarde los datos en una base de datos persistente.
+
+### ¿Qué corrección realizarás antes de la EA2 del 14 de octubre?
+
+Antes de la EA2 revisaré nuevamente las pruebas de accesibilidad, validación, responsive y funcionamiento del Preview para corregir cualquier problema pendiente.
