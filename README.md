@@ -40,32 +40,35 @@ Permite:
 - Filtrar por `Red`.
 - Filtrar por `Software`.
 - Mostrar la cantidad de servicios encontrados.
+- Mostrar el estado vacío cuando no existen coincidencias.
 - Mantener siempre los cinco servicios disponibles en el selector del formulario.
 - Devolver una nueva lista sin modificar la fuente original.
 
 ### Reto 2 - Justificación de urgencia
 
-Se implementó:
+Se implementó la función:
 
 `validarUrgencia(prioridad, motivo)`
 
-Cuando la prioridad seleccionada es `alta`, la persona debe ingresar una justificación de al menos 15 caracteres después de eliminar espacios al inicio y final.
+Cuando la prioridad seleccionada es `alta`, se exige una justificación de al menos 15 caracteres después de aplicar `trim`.
 
 Si la justificación no es válida:
 
 - Se muestra un mensaje de error.
 - La solicitud no se registra.
-- El foco puede dirigirse al campo correspondiente.
+- El foco se dirige al campo correspondiente.
 
-Las prioridades media y baja no requieren esta justificación.
+Las prioridades `media` y `baja` no requieren justificación de urgencia.
+
+Un envío válido genera una sola solicitud.
 
 ### Reto 3 - Cambio de estado y auditoría
 
-Se implementó:
+Se implementó la función:
 
 `cambiarEstado(solicitudes, id, nuevoEstado, actor, auditoria)`
 
-Solo el actor con rol `tecnico` puede modificar el estado de una solicitud.
+Solo un actor con rol `tecnico` puede modificar el estado de una solicitud existente.
 
 Estados permitidos:
 
@@ -76,24 +79,25 @@ Estados permitidos:
 
 Cada cambio válido genera un registro de auditoría en memoria con:
 
-- Identificador correlativo.
-- Actor.
-- Solicitud.
-- Estado anterior.
-- Estado nuevo.
-- Fecha en formato ISO.
+- `id`
+- `actor_id`
+- `solicitud_id`
+- `accion`
+- `anterior`
+- `nuevo`
+- `fecha`
 
-Los cambios inválidos o repetidos no modifican la solicitud ni generan auditoría.
+Los cambios inválidos, estados repetidos, identificadores inexistentes o actores sin rol técnico no modifican la solicitud ni generan auditoría.
 
 También se agregó una confirmación visual mediante la clase `.ea2-actualizada`.
 
-Cuando el navegador utiliza `prefers-reduced-motion: reduce`, se elimina el movimiento y se mantiene una confirmación visual.
+Cuando el navegador utiliza `prefers-reduced-motion: reduce`, se elimina el movimiento y se conserva una confirmación visual.
 
 El selector de roles utilizado en la interfaz es únicamente demostrativo y no representa autenticación real.
 
 ### Reto 4 - Analítica con consentimiento
 
-Se implementó:
+Se implementó la función:
 
 `registrarEvento(consentimiento, nombre, servicio, eventos)`
 
@@ -113,14 +117,15 @@ Cada evento contiene únicamente:
 No se registran:
 
 - Nombre.
-- Correo.
+- Correo electrónico.
 - Descripción del problema.
 - Contraseñas.
+- Datos personales.
 - El objeto completo de la solicitud.
 
 Si la persona rechaza la analítica o no toma una decisión, el formulario continúa funcionando normalmente.
 
-Al rechazar posteriormente la analítica se detiene el registro de nuevos eventos, pero los eventos existentes permanecen en memoria.
+Si posteriormente se revoca la preferencia de analítica, se detiene el registro de nuevos eventos y los eventos anteriores permanecen en memoria.
 
 ## Datos y persistencia
 
@@ -133,7 +138,7 @@ Los siguientes datos existen únicamente durante la sesión del navegador:
 - Eventos de analítica.
 - Preferencia de analítica.
 
-Al recargar la página estos datos desaparecen.
+Al recargar la página, estos datos desaparecen.
 
 Todo el portal utiliza información ficticia.
 

@@ -41,12 +41,10 @@ Los cuatro retos funcionales fueron verificados localmente:
 ## Versión y despliegue EA2
 
 - Rama de trabajo: `release/ea2`
-- Commit final EA2: Pendiente
-- Pull Request: Pendiente
-- URL de Preview: Pendiente
-- SHA de Preview: Pendiente
-- Merge a `main`: Pendiente
-- URL de Producción: Pendiente
-- SHA de Producción: Pendiente
-
-> Los datos de versión y despliegue se completarán después del commit final, Push, Pull Request, Preview, Merge y despliegue de Producción.
+- Commit final EA2: `97ee197`
+- Pull Request: `#6 - EA2 - mejoras funcionales y auditoría del portal Nova`
+- URL de Preview: https://clases-sise-git-release-ea2-sise2.vercel.app
+- SHA de Preview: `97ee197`
+- Merge a `main`: Completado
+- URL de Producción: https://clases-si.vercel.app
+- SHA de Producción: `d1c51b2`
