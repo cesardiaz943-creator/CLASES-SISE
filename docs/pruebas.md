@@ -1,67 +1,52 @@
-## Pruebas - Guía de aprendizaje 5
+## Pruebas - Evaluación Aplicativa 2
 
-- Fecha: 11/10/2026
+- Fecha: 14/10/2026
 - Navegador: Google Chrome
-- Rama: feature/catalogo-dinamico
-- Entorno: Servidor local con npm run dev
-- URL local: http://127.0.0.1:5500
-- SHA probado: be9c68a
-- Anchos de prueba: 320 px, 768 px y 1440 px; zoom 200 %
+- Rama: release/ea2
+- Entorno: Servidor local
+- URL local: http://127.0.0.1:5500/public/index.html
+- SHA probado: Pendiente de commit final
+- Resoluciones verificadas: 320 px, 768 px y 1440 px
+- Zoom verificado: 200 %
+- Preferencia de movimiento reducido: Verificada
+- Recorrido con teclado y foco visible: Verificado
 
-| ID  | Acción                                    | Resultado esperado                                            | Resultado real                                                                                                                                           | Corrección                                                 | Estado       | Evidencia                         |
-| --- | ----------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------ | --------------------------------- | --- |
-| D1  | Cargar el portal por HTTP                 | Cuatro servicios en catálogo y selector; sin errores JS.      | El portal cargó correctamente por HTTP y el catálogo se generó desde servicios.json.                                                                     | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| D2  | Agregar quinto servicio solo en JSON      | Tarjeta y opción nuevas, sin editar HTML.                     | Se agregó el quinto servicio únicamente en servicios.json y apareció en el catálogo y selector.                                                          | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| D3  | Renombrar JSON y luego restaurarlo        | Error comprensible; registro bloqueado; carga se recupera.    | Al renombrar servicios.json se mostró el mensaje de error y al restaurarlo volvió a cargar correctamente.                                                | Se restauró el nombre servicios.json después de la prueba. | Cumple       | Pendiente de adjuntar captura.    |
-| D4  | Usar JSON inválido o id duplicado         | Contrato rechazado y mensaje de carga fallida.                | Al duplicar el id 4, el catálogo fue rechazado y se mostró el mensaje de carga fallida. Al restaurar el id 5, la carga volvió a funcionar correctamente. | Se restauró el id original del quinto servicio.            | Cumple       | Pendiente de adjuntar captura.    |     |
-| D5  | Nombre con cadena HTML de prueba          | Texto literal, sin ejecución ni nodos inyectados.             | La cadena `<img src=x onerror=alert(1)>` apareció como texto literal y no ejecutó ninguna alerta.                                                        | Se restauró el nombre original después de la prueba.       | Cumple       | Pendiente de adjuntar captura.    |
-| F1  | Enviar vacío y con servicio sin elegir    | Errores asociados y foco en primer control inválido.          | Se mostraron los errores y el foco pasó al campo Nombre completo.                                                                                        | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| F2  | Correo ana@ y descripción de 4 caracteres | Errores de formato y longitud; ninguna fila agregada.         | Se mostraron los errores de correo y descripción y no se registró ninguna solicitud.                                                                     | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| F3  | Descripción con 10 espacios               | Rechazo por texto útil insuficiente.                          | La descripción formada solo por espacios fue rechazada.                                                                                                  | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| F4  | No elegir prioridad; corregir campos      | Mensaje del grupo; errores se limpian al corregir.            | Al enviar sin prioridad apareció el mensaje "Selecciona una prioridad". Al seleccionar una prioridad, el mensaje desapareció.                            | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| F5  | Enviar válido y repetir durante la espera | Estado de proceso y confirmación; una fila; botón recuperado. | Los intentos repetidos durante el procesamiento generaron una sola fila y el botón volvió a habilitarse.                                                 | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| A1  | Abrir ayuda con Enter y Espacio; usar Esc | Panel y aria-expanded sincronizados; foco vuelve al botón.    | El panel abrió con teclado, cerró con Escape y el foco volvió al botón de ayuda.                                                                         | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |
-| A2  | Completar recorrido solo con teclado      | Orden lógico, foco visible y ningún bloqueo.                  | El recorrido con Tab y Shift+Tab mantuvo un orden lógico, el foco fue visible y no se produjo ningún bloqueo de teclado.                                 | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |     |
-| A3  | Activar reduced motion                    | Movimiento reducido; contenido y confirmación visibles.       | Al emular prefers-reduced-motion: reduce, las animaciones y transiciones se redujeron y el contenido continuó visible y utilizable.                      | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |     |
-| A4  | Probar lector de pantalla                 | Campos identificados; errores y estado se anuncian.           | No ejecutada.                                                                                                                                            | No se realizó la prueba con lector de pantalla.            | No ejecutada | Pendiente.                        |     |
-| R1  | Probar 320, 768 y 1440 px y zoom 200 %    | Contenido legible; página sin desbordamiento horizontal.      | El portal se mantuvo legible y utilizable en 320 px, 768 px, 1440 px y con zoom al 200 %, sin desbordamiento horizontal general.                         | No fue necesaria.                                          | Cumple       | Pendiente de adjuntar captura.    |     |
-| P1  | Abrir Preview del commit entregado        | JSON y scripts cargan; recorrido funcional completo.          | El Preview cargó correctamente los 5 servicios desde JSON, el panel de ayuda funcionó y se registró SOL-0001 en la tabla de solicitudes.                 | No fue necesaria.                                          | Cumple       | Capturas del Preview funcionando. |
+| ID     | Acción                                                                                           | Resultado esperado                                                                                                                                 | Resultado real                                                                                                                                              | Corrección        | Estado | Evidencia                                           |
+| ------ | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------ | --------------------------------------------------- |
+| EA2-01 | Seleccionar el filtro `Todas`                                                                    | Se muestran los 5 servicios. El selector del formulario conserva también los 5 servicios.                                                          | Se mostraron los 5 servicios y el selector conservó todas las opciones disponibles.                                                                         | No fue necesaria. | Cumple | Prueba local del catálogo.                          |
+| EA2-02 | Filtrar por `Accesos`, `Hardware`, `Red` y `Software`                                            | Cada filtro muestra únicamente las coincidencias exactas de la categoría. La fuente original no se modifica.                                       | Los filtros mostraron únicamente los servicios correspondientes a cada categoría. Al volver a `Todas` se mostraron nuevamente los 5 servicios.              | No fue necesaria. | Cumple | Prueba local de filtros.                            |
+| EA2-03 | Seleccionar prioridad `Alta` e ingresar una justificación menor de 15 caracteres                 | Se muestra un mensaje de error, el foco llega al campo de justificación y la solicitud no se registra.                                             | Con una justificación como `Muy urgente` apareció el mensaje de mínimo 15 caracteres y la solicitud no fue registrada.                                      | No fue necesaria. | Cumple | Captura de validación de urgencia.                  |
+| EA2-04 | Seleccionar prioridad `Alta` con una justificación válida de 15 o más caracteres                 | El formulario acepta la justificación y registra exactamente una solicitud válida.                                                                 | La solicitud con prioridad alta, justificación válida y descripción correcta fue registrada una sola vez.                                                   | No fue necesaria. | Cumple | Captura de solicitud registrada.                    |
+| EA2-05 | Seleccionar prioridad `Media` o `Baja`                                                           | La justificación de urgencia no es obligatoria. El formulario continúa funcionando con la descripción requerida.                                   | El campo de justificación se ocultó para prioridad media y baja y la solicitud pudo registrarse normalmente.                                                | No fue necesaria. | Cumple | Prueba local del formulario.                        |
+| EA2-06 | Intentar cambiar el estado con `Ana Demo · usuario`                                              | El cambio es rechazado porque solo el rol `tecnico` puede modificar estados. No se modifica la solicitud ni se agrega auditoría.                   | El sistema mostró que solo el rol técnico puede cambiar estados y la solicitud permaneció en su estado original.                                            | No fue necesaria. | Cumple | Prueba local del selector de actor.                 |
+| EA2-07 | Cambiar `Pendiente` a `En proceso` con `Carlos Demo · técnico`                                   | El estado cambia correctamente y se agrega exactamente un registro de auditoría con actor, solicitud, estado anterior y nuevo.                     | SOL-0001 cambió de `Pendiente` a `En proceso` y se registró una auditoría con el cambio correspondiente.                                                    | No fue necesaria. | Cumple | Captura de tabla y auditoría.                       |
+| EA2-08 | Intentar cambiar nuevamente `En proceso` a `En proceso`                                          | El cambio se rechaza por ser un estado repetido y no se agrega una nueva auditoría.                                                                | Se mostró `Selecciona un estado diferente al actual` y el historial de auditoría mantuvo un solo registro.                                                  | No fue necesaria. | Cumple | Captura de cambio rechazado.                        |
+| EA2-09 | Marcar `Aceptar analítica`, seleccionar un servicio y enviar una solicitud válida                | Se registran únicamente los eventos `select_service` y `submit_request`, guardando solamente `event`, `service_id` y `categoria`.                  | En la consola se comprobaron eventos `select_service` y `submit_request` con `service_id` y `categoria`. No se almacenaron nombre, correo ni descripción.   | No fue necesaria. | Cumple | DevTools Console con `eventosEA2`.                  |
+| EA2-10 | Marcar `Rechazar analítica` o no seleccionar ninguna preferencia y utilizar el formulario        | El formulario continúa funcionando y no se agregan eventos nuevos. Los eventos anteriores no se eliminan.                                          | La solicitud se registró normalmente con analítica rechazada o sin decisión, y no se agregaron eventos nuevos. El historial anterior permaneció en memoria. | No fue necesaria. | Cumple | Prueba local y DevTools Console.                    |
+| EA2-11 | Probar la interfaz en 320 px, 768 px y 1440 px, zoom 200 %, recorrido con teclado y foco visible | El contenido permanece legible y utilizable, sin desbordamiento horizontal general. El recorrido con teclado mantiene orden lógico y foco visible. | La interfaz permaneció utilizable en 320 px, 768 px y 1440 px y con zoom al 200 %. El recorrido con teclado fue lógico y el foco permaneció visible.        | No fue necesaria. | Cumple | Pruebas responsive y de teclado en Chrome DevTools. |
+| EA2-12 | Activar `prefers-reduced-motion: reduce` y realizar un cambio de estado                          | La confirmación visual de `.ea2-actualizada` permanece, pero se elimina el movimiento de la animación.                                             | Al activar movimiento reducido se eliminó la animación de movimiento y la confirmación visual del cambio permaneció visible.                                | No fue necesaria. | Cumple | Chrome DevTools - Rendering.                        |
 
-## Pruebas del reto individual
+## Resultado general de la EA2
 
-| ID  | Acción                                                               | Resultado esperado                                                              | Resultado real                                                                               | Corrección        | Estado | Evidencia |
-| --- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------------- | ------ | --------- |
-| S1  | Enviar dos solicitudes válidas con servicios y prioridades distintos | Se generan SOL-0001 y SOL-0002 y aparecen dos filas con los datos correctos.    | Se generaron SOL-0001 y SOL-0002 con servicio, prioridad y estado correspondientes.          | No fue necesaria. | Cumple |           |
-| S2  | Intentar varios envíos mientras una solicitud está procesándose      | Se agrega una sola fila y el botón vuelve a habilitarse al finalizar.           | Solo se agregó una fila durante los intentos repetidos y el botón volvió a habilitarse.      | No fue necesaria. | Cumple |           |
-| S3  | Recargar la página después de registrar solicitudes                  | La tabla queda vacía y la siguiente solicitud vuelve a comenzar desde SOL-0001. | Al recargar desaparecieron las solicitudes y la numeración volvió a comenzar desde SOL-0001. | No fue necesaria. | Cumple |           |
+Los cuatro retos funcionales fueron verificados localmente:
 
-## Correcciones realizadas
+- El catálogo filtra los servicios por categoría sin modificar la fuente original y mantiene los 5 servicios en el selector.
+- La prioridad alta exige una justificación de al menos 15 caracteres útiles.
+- Solo el rol técnico puede cambiar estados válidos y cada cambio correcto genera una auditoría en memoria.
+- La medición registra únicamente `select_service` y `submit_request` cuando la persona acepta analítica.
+- El formulario permanece operativo cuando la analítica es rechazada o no existe una decisión.
+- No se almacenan datos personales dentro de los eventos de analítica.
+- La interfaz fue comprobada en 320 px, 768 px, 1440 px, zoom 200 %, teclado, foco visible y movimiento reducido.
 
-### Corrección 1 - Tabla de estados en 320 px
+## Versión y despliegue EA2
 
-**Problema detectado:**  
-En la vista de 320 px la tabla de estados comprimía demasiado el contenido y la palabra "Pendiente" se dividía de forma incorrecta.
+- Rama de trabajo: `release/ea2`
+- Commit final EA2: Pendiente
+- Pull Request: Pendiente
+- URL de Preview: Pendiente
+- SHA de Preview: Pendiente
+- Merge a `main`: Pendiente
+- URL de Producción: Pendiente
+- SHA de Producción: Pendiente
 
-**Corrección aplicada:**  
-Se ajustaron el tamaño de fuente, el espaciado de las celdas y las reglas de corte de palabras dentro de la media query para dispositivos pequeños.
-
-**Resultado:**  
-Las cuatro columnas de la tabla permanecen visibles y los estados se muestran de forma más legible en 320 px.
-
-**Evidencia:**  
-Captura antes y después de la corrección.
-
-### Corrección 2 - Catálogo de servicios en 1440 px
-
-**Problema detectado:**  
-En la vista de 1440 px, la tarjeta "Soporte prioritario" ocupaba dos columnas y provocaba que la tarjeta "Soporte de software" bajara a una segunda fila.
-
-**Código anterior:**
-
-```css
-@media (min-width: 768px) {
-  .service-card--featured {
-    grid-column: span 2;
-  }
-}
-```
+> Los datos de versión y despliegue se completarán después del commit final, Push, Pull Request, Preview, Merge y despliegue de Producción.

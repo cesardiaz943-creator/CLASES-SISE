@@ -1,6 +1,11 @@
+import { filtrarServicios } from './ea2-logica.js';
+
 const catalogo = document.querySelector('#catalogo');
 const selector = document.querySelector('#servicio');
 const aviso = document.querySelector('#estado-catalogo');
+const filtros = document.querySelectorAll('.ea2-filtro');
+
+let serviciosOriginales = [];
 
 function crearTarjeta(s) {
   const tarjeta = document.createElement('article');
@@ -39,6 +44,7 @@ function crearTarjeta(s) {
 
     if (servicios) {
       servicios.classList.remove('selector-servicios--visible');
+
       servicios.hidden = true;
     }
 
@@ -88,8 +94,47 @@ function validarContrato(lista) {
   });
 }
 
+function mostrarServicios(lista) {
+  catalogo.replaceChildren(...lista.map(crearTarjeta));
+
+  if (lista.length === 0) {
+    aviso.textContent = 'No hay servicios disponibles para esta categoría.';
+    return;
+  }
+
+  if (lista.length === 1) {
+    aviso.textContent = '1 servicio disponible.';
+    return;
+  }
+
+  aviso.textContent = lista.length + ' servicios disponibles.';
+}
+
+function aplicarFiltro(categoria) {
+  const resultado = filtrarServicios(serviciosOriginales, categoria);
+
+  mostrarServicios(resultado);
+}
+
+function activarFiltros() {
+  filtros.forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const categoria = boton.dataset.categoria;
+
+      filtros.forEach((otroBoton) => {
+        otroBoton.classList.remove('is-active');
+      });
+
+      boton.classList.add('is-active');
+
+      aplicarFiltro(categoria);
+    });
+  });
+}
+
 async function cargarServicios() {
   aviso.textContent = 'Cargando servicios…';
+
   selector.disabled = true;
 
   try {
@@ -107,21 +152,35 @@ async function cargarServicios() {
 
     validarContrato(lista);
 
-    catalogo.replaceChildren(...lista.map(crearTarjeta));
+    // Copia independiente de la fuente original.
+    serviciosOriginales = [...lista];
 
+    // Muestra inicialmente los 5 servicios.
+    mostrarServicios(serviciosOriginales);
+
+    // El selector conserva SIEMPRE los 5 servicios.
     selector.replaceChildren(new Option('Selecciona un servicio', ''));
 
     lista.forEach((s) => {
-      selector.add(new Option(s.nombre, String(s.id)));
+      const opcion = new Option(s.nombre, String(s.id));
+
+      // EA2 - Reto 4
+      // Guardamos solo la categoría necesaria
+      // para identificar el servicio seleccionado.
+      opcion.dataset.categoria = s.categoria;
+
+      selector.add(opcion);
     });
 
     selector.disabled = false;
 
-    aviso.textContent = lista.length + ' servicios disponibles.';
+    activarFiltros();
   } catch (error) {
     catalogo.replaceChildren();
 
     selector.replaceChildren(new Option('Servicios no disponibles', ''));
+
+    selector.disabled = true;
 
     aviso.textContent = 'No pudimos cargar servicios. Recarga para reintentar.';
 

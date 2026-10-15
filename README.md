@@ -1,132 +1,165 @@
-# Portal de Soporte TI - Nova Servicios
+# Nova Servicios TI - Evaluación Aplicativa 2
 
-Portal web estático y responsive desarrollado para Nova Servicios como parte de la Evaluación Parcial del curso Desarrollo de Entornos Web.
+Portal web de práctica para la gestión de solicitudes de soporte TI.
 
-El portal permite consultar servicios de soporte TI, completar una solicitud simulada, visualizar estados ficticios de solicitudes, revisar preguntas frecuentes y consultar información de contacto.
+Proyecto desarrollado para el curso Desarrollo de Entornos Web.
 
-El formulario no envía ni almacena información. Todo el proceso es una simulación.
+## Base del proyecto
 
-## Autor
+La solución parte del Portal de Soporte TI desarrollado durante la semana 5.
 
-Julio César Castrejón Díaz
-
-Curso: Desarrollo de Entornos Web  
-Proyecto: Evaluación Parcial - Portal de Soporte TI
-
-## Funcionalidades
+La base ya incluía:
 
 - Navegación responsive.
-- Presentación de Nova Servicios.
-- Acceso directo al formulario de soporte.
-- Catálogo de 4 servicios TI.
-- Formulario de incidencia con validación nativa.
-- Selección única de prioridad.
-- Confirmación simulada del formulario.
-- Tabla de estados ficticios de solicitudes.
-- 5 preguntas frecuentes organizadas en 2 categorías.
-- Información de contacto con horario ficticio.
-- Navegación mediante teclado con foco visible.
-- Diseño responsive para 320 px, 768 px y 1440 px.
-- Compatibilidad con zoom al 200 %.
+- Catálogo de servicios cargado desde JSON.
+- Formulario de solicitud.
+- Validaciones de campos.
+- Panel de ayuda accesible.
+- Registro de solicitudes en memoria.
+- Prevención de envíos duplicados.
+- Compatibilidad con teclado y foco visible.
+- Soporte para `prefers-reduced-motion`.
+
+Para la EA2 se trabajó sobre la rama:
+
+`release/ea2`
+
+## Cambios realizados en la EA2
+
+### Reto 1 - Filtro de servicios
+
+Se implementó la función:
+
+`filtrarServicios(lista, categoria)`
+
+Permite:
+
+- Mostrar todos los servicios con la opción `Todas`.
+- Filtrar por `Accesos`.
+- Filtrar por `Hardware`.
+- Filtrar por `Red`.
+- Filtrar por `Software`.
+- Mostrar la cantidad de servicios encontrados.
+- Mantener siempre los cinco servicios disponibles en el selector del formulario.
+- Devolver una nueva lista sin modificar la fuente original.
+
+### Reto 2 - Justificación de urgencia
+
+Se implementó:
+
+`validarUrgencia(prioridad, motivo)`
+
+Cuando la prioridad seleccionada es `alta`, la persona debe ingresar una justificación de al menos 15 caracteres después de eliminar espacios al inicio y final.
+
+Si la justificación no es válida:
+
+- Se muestra un mensaje de error.
+- La solicitud no se registra.
+- El foco puede dirigirse al campo correspondiente.
+
+Las prioridades media y baja no requieren esta justificación.
+
+### Reto 3 - Cambio de estado y auditoría
+
+Se implementó:
+
+`cambiarEstado(solicitudes, id, nuevoEstado, actor, auditoria)`
+
+Solo el actor con rol `tecnico` puede modificar el estado de una solicitud.
+
+Estados permitidos:
+
+- Pendiente
+- En proceso
+- Resuelto
+- Cerrado/Cancelado
+
+Cada cambio válido genera un registro de auditoría en memoria con:
+
+- Identificador correlativo.
+- Actor.
+- Solicitud.
+- Estado anterior.
+- Estado nuevo.
+- Fecha en formato ISO.
+
+Los cambios inválidos o repetidos no modifican la solicitud ni generan auditoría.
+
+También se agregó una confirmación visual mediante la clase `.ea2-actualizada`.
+
+Cuando el navegador utiliza `prefers-reduced-motion: reduce`, se elimina el movimiento y se mantiene una confirmación visual.
+
+El selector de roles utilizado en la interfaz es únicamente demostrativo y no representa autenticación real.
+
+### Reto 4 - Analítica con consentimiento
+
+Se implementó:
+
+`registrarEvento(consentimiento, nombre, servicio, eventos)`
+
+La aplicación registra únicamente los eventos:
+
+- `select_service`
+- `submit_request`
+
+Los eventos se almacenan solo cuando la preferencia de analítica es `aceptado`.
+
+Cada evento contiene únicamente:
+
+- `event`
+- `service_id`
+- `categoria`
+
+No se registran:
+
+- Nombre.
+- Correo.
+- Descripción del problema.
+- Contraseñas.
+- El objeto completo de la solicitud.
+
+Si la persona rechaza la analítica o no toma una decisión, el formulario continúa funcionando normalmente.
+
+Al rechazar posteriormente la analítica se detiene el registro de nuevos eventos, pero los eventos existentes permanecen en memoria.
+
+## Datos y persistencia
+
+Este proyecto no utiliza backend ni base de datos real.
+
+Los siguientes datos existen únicamente durante la sesión del navegador:
+
+- Solicitudes.
+- Auditoría.
+- Eventos de analítica.
+- Preferencia de analítica.
+
+Al recargar la página estos datos desaparecen.
+
+Todo el portal utiliza información ficticia.
 
 ## Tecnologías utilizadas
 
-- HTML5.
-- CSS3.
-- Flexbox.
-- CSS Grid.
-- JavaScript proporcionado mediante `ui.js`.
-- Git y GitHub.
-- Node.js para el servidor local.
-- Vercel para el Preview del proyecto.
+- HTML5
+- CSS3
+- JavaScript
+- JSON
+- Node.js
+- Git
+- GitHub
+- Vercel
 
-No se utilizan frameworks, backend, autenticación ni base de datos real.
+No se utilizaron frameworks de JavaScript.
 
 ## Ejecución local
 
-Se requiere tener instalado Node.js, Git y Visual Studio Code.
+Requisitos:
 
-Desde la carpeta raíz del proyecto ejecutar:
+- Node.js 22 o superior.
+- Git.
+- Navegador web moderno.
+
+Instalar las dependencias:
 
 ```bash
 npm ci
-npm run dev
 ```
-
-## Preguntas de inicio
-
-### ¿Qué partes del portal repiten información de los servicios?
-
-El catálogo de servicios y el selector del formulario repiten información sobre los servicios disponibles. Por eso la guía propone usar una sola fuente JSON para que ambos se actualicen con los mismos datos.
-
-### ¿Cómo se relaciona servicio_id con el modelo de la semana 4?
-
-servicio_id identifica el servicio elegido dentro de una solicitud. Se relaciona con el id de cada servicio y permite asociar una solicitud con un servicio específico.
-
-### ¿Qué diferencia existe entre validar un formulario, simular una solicitud y guardarla en una base de datos?
-
-Validar un formulario significa comprobar que los datos ingresados sean correctos. Simular una solicitud significa procesarla solo de manera temporal dentro de la página. Guardarla en una base de datos significa almacenarla de forma persistente para que no se pierda al recargar.
-
-## Actividad de comprensión - Fuente única de servicios
-
-### Recorrido de los datos
-
-Los servicios se almacenan en el archivo JSON. La función cargarServicios obtiene esos datos, luego crearTarjeta genera las tarjetas del catálogo y también se crean las opciones del selector. Finalmente, estos elementos se incorporan al DOM de la página.
-
-JSON → cargarServicios → crearTarjeta y opciones → DOM
-
-### ¿Por qué una coma final rompe JSON?
-
-JSON utiliza una sintaxis estricta. No permite colocar una coma después de la última propiedad de un objeto ni después del último elemento de un arreglo, porque el archivo deja de ser un JSON válido.
-
-### ¿Por qué cargar con fetch requiere un servidor?
-
-fetch carga recursos mediante HTTP. Por eso el proyecto debe ejecutarse desde un servidor local, como el que iniciamos con npm run dev, y no directamente mediante file://.
-
-## Punto de control - Sesión 9
-
-### querySelector
-
-Se usa para seleccionar un elemento del DOM. Por ejemplo:
-`const catalogo = document.querySelector('#catalogo');`
-
-### createElement
-
-Se usa para crear nuevos elementos HTML desde JavaScript. Por ejemplo:
-`const tarjeta = document.createElement('article');`
-
-### textContent
-
-Se usa para colocar texto de forma segura dentro de un elemento. Por ejemplo:
-`titulo.textContent = s.nombre;`
-
-### classList
-
-Se usa para agregar o modificar clases CSS de un elemento. Por ejemplo:
-`tarjeta.classList.add('service-card');`
-
-## Limitación de las solicitudes en memoria
-
-Las solicitudes de práctica se almacenan únicamente en memoria mientras la página permanece abierta. Al recargar el navegador, la lista de solicitudes se elimina y la numeración vuelve a comenzar desde SOL-0001.
-
-## Reflexión y transferencia
-
-### ¿Qué evitó duplicar los servicios?
-
-Usar una única fuente de datos en `servicios.json` evitó duplicar la información. El catálogo y el selector del formulario se generan a partir del mismo archivo JSON.
-
-### ¿Por qué textContent es adecuado para datos externos?
-
-`textContent` permite mostrar datos externos como texto literal sin interpretarlos como HTML. Esto ayuda a evitar que contenido malicioso cree elementos o ejecute código en la página.
-
-### ¿Cómo detectaste un envío duplicado?
-
-Se detectó intentando enviar varias veces durante el tiempo de procesamiento. La variable `procesando` impide que se registre más de una solicitud mientras una anterior todavía está en curso.
-
-### ¿Qué parte reemplazarías para persistir en una API?
-
-Se reemplazaría el almacenamiento temporal en el arreglo `solicitudes` por una petición a una API que guarde los datos en una base de datos persistente.
-
-### ¿Qué corrección realizarás antes de la EA2 del 14 de octubre?
-
-Antes de la EA2 revisaré nuevamente las pruebas de accesibilidad, validación, responsive y funcionamiento del Preview para corregir cualquier problema pendiente.

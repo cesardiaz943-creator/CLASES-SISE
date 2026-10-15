@@ -3,13 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Nova Servicios | Portal de Soporte TI</title>
+
     <meta
       name="description"
       content="Portal de soporte TI de Nova Servicios para consultar servicios y validar solicitudes de asistencia técnica."
     />
+
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
     <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <link rel="stylesheet" href="assets/css/ea2.css" />
+
     <script src="assets/js/ui.js" defer></script>
   </head>
   <body>
@@ -121,6 +128,26 @@
           </p>
         </div>
 
+        <div class="ea2-filtros" aria-label="Filtrar servicios por categoría">
+          <button type="button" class="ea2-filtro is-active" data-categoria="Todas">
+            Todas
+          </button>
+
+          <button type="button" class="ea2-filtro" data-categoria="Accesos">
+            Accesos
+          </button>
+
+          <button type="button" class="ea2-filtro" data-categoria="Hardware">
+            Hardware
+          </button>
+
+          <button type="button" class="ea2-filtro" data-categoria="Red">Red</button>
+
+          <button type="button" class="ea2-filtro" data-categoria="Software">
+            Software
+          </button>
+        </div>
+
         <p id="estado-catalogo" role="status" aria-live="polite"></p>
 
         <div id="catalogo" class="services__grid"></div>
@@ -146,6 +173,26 @@
             Los campos con * son obligatorios. Esta demostración no envía ni almacena
             solicitudes.
           </p>
+
+          <fieldset class="ea2-analitica">
+            <legend>Preferencia de analítica</legend>
+
+            <p>
+              Esta práctica puede contar acciones del portal sin guardar datos personales.
+            </p>
+
+            <label>
+              <input type="radio" name="consentimiento" value="aceptado" />
+              Aceptar analítica
+            </label>
+
+            <label>
+              <input type="radio" name="consentimiento" value="rechazado" />
+              Rechazar analítica
+            </label>
+
+            <small> Puedes usar el formulario aunque no aceptes la medición. </small>
+          </fieldset>
 
           <fieldset>
             <legend>Datos de contacto</legend>
@@ -211,6 +258,24 @@
               <p id="error-prioridad" role="alert"></p>
             </fieldset>
 
+            <div id="grupo-urgencia" hidden>
+              <label for="motivo-urgencia"> Justificación de urgencia * </label>
+
+              <textarea
+                id="motivo-urgencia"
+                name="motivo-urgencia"
+                rows="3"
+                maxlength="300"
+                aria-describedby="ayuda-urgencia error-urgencia"
+              ></textarea>
+
+              <small id="ayuda-urgencia">
+                Si eliges prioridad alta, explica la urgencia con al menos 15 caracteres.
+              </small>
+
+              <p id="error-urgencia" role="alert"></p>
+            </div>
+
             <label for="descripcion">Descripción del problema *</label>
             <textarea
               id="descripcion"
@@ -239,7 +304,23 @@
       </section>
 
       <section id="solicitudes" aria-labelledby="solicitudes-title">
-        <h2 id="solicitudes-title">Solicitudes de práctica</h2>
+        <div class="ea2-solicitudes__encabezado">
+          <div>
+            <p class="selector-servicios__eyebrow">02 / Seguimiento</p>
+            <h2 id="solicitudes-title">Solicitudes de práctica</h2>
+          </div>
+
+          <div class="ea2-actor">
+            <label for="actor-rol">Actor demostrativo</label>
+
+            <select id="actor-rol">
+              <option value="usuario">Ana Demo · usuario</option>
+              <option value="tecnico">Carlos Demo · técnico</option>
+            </select>
+
+            <small> El selector simula un rol. No representa autenticación real. </small>
+          </div>
+        </div>
 
         <div class="table-wrapper">
           <table>
@@ -253,11 +334,22 @@
                 <th scope="col">Servicio</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Estado</th>
+                <th scope="col">Cambiar estado</th>
               </tr>
             </thead>
 
             <tbody id="filas-solicitudes"></tbody>
           </table>
+        </div>
+
+        <div class="ea2-auditoria">
+          <h3>Auditoría de cambios</h3>
+
+          <p id="estado-auditoria" role="status" aria-live="polite">
+            Todavía no hay cambios de estado registrados.
+          </p>
+
+          <ul id="lista-auditoria"></ul>
         </div>
       </section>
 
@@ -342,6 +434,6 @@
       <p>Portal TI de práctica. No registra tickets reales.</p>
     </footer>
     <script type="module" src="assets/js/catalogo.js"></script>
-    <script src="assets/js/interaccion.js" defer></script>
+    <script type="module" src="assets/js/interaccion.js"></script>
   </body>
 </html>
