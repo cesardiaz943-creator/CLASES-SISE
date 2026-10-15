@@ -16,7 +16,15 @@
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <header class="site-header">
       <nav class="navbar container" aria-label="Navegación principal">
-        <a class="navbar__logo" href="#inicio">Nova Servicios</a>
+        <a class="navbar__logo" href="#inicio" aria-label="Nova Servicios - Inicio">
+          <span class="navbar__logo-mark" aria-hidden="true">N.</span>
+
+          <span class="navbar__brand">
+            <strong>Nova</strong>
+            <small>Servicios TI</small>
+          </span>
+        </a>
+
         <button
           class="navbar__toggle"
           type="button"
@@ -26,30 +34,96 @@
         >
           Menú
         </button>
-        <ul class="navbar__menu" id="nav-menu">
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#soporte">Solicitar soporte</a></li>
-          <li><a href="#solicitudes">Estado</a></li>
-          <li><a href="#preguntas">Preguntas frecuentes</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
+
+        <div class="navbar__actions">
+          <ul class="navbar__menu" id="nav-menu">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#solicitudes">Solicitudes</a></li>
+            <li><a href="#preguntas">Preguntas</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+
+          <button class="navbar__cta" id="abrir-servicios" type="button">
+            Solicitar soporte
+            <span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </nav>
     </header>
     <main id="contenido" class="container" tabindex="-1">
       <section class="hero" id="inicio" aria-labelledby="hero-title">
-        <h1 id="hero-title">Soporte TI para tu equipo</h1>
-        <p>
-          Nova Servicios brinda asistencia técnica para resolver incidencias de red,
-          hardware, software y acceso.
-        </p>
-        <a class="button" href="#soporte">Solicitar soporte</a>
+        <div class="hero__content">
+          <p class="hero__eyebrow">
+            <span aria-hidden="true">●</span>
+            Tu centro de soporte TI
+          </p>
+
+          <h1 id="hero-title">
+            Menos obstáculos.<br />
+            Más <span>soluciones.</span>
+          </h1>
+
+          <p class="hero__description">
+            Un lugar para resolver tus dudas, elegir el servicio que necesitas y dar el
+            siguiente paso.
+          </p>
+
+          <div class="hero__actions">
+            <a class="button hero__primary" href="#soporte">
+              Crear una solicitud
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <a class="hero__secondary" href="#servicios">
+              Explorar servicios
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          <p class="hero__note">Entorno de práctica · Usa datos ficticios</p>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <p class="hero__visual-label">Todo empieza con una solicitud</p>
+
+          <div class="hero__card">
+            <span class="hero__card-icon">↗</span>
+
+            <small>Centro de soporte</small>
+
+            <strong>
+              Estamos aquí<br />
+              para ayudarte.
+            </strong>
+
+            <span class="hero__card-tag">● Un paso a la vez</span>
+          </div>
+
+          <p class="hero__visual-footer">Accesos / Equipos / Conectividad</p>
+        </div>
       </section>
-      <section id="servicios" aria-labelledby="services-title">
-        <h2 id="services-title">Servicios de soporte</h2>
+      <section
+        id="servicios"
+        class="selector-servicios"
+        aria-labelledby="services-title"
+        hidden
+      >
+        <div class="selector-servicios__encabezado">
+          <div>
+            <p class="selector-servicios__eyebrow">01 / Catálogo</p>
+
+            <h2 id="services-title">¿En qué podemos ayudarte?</h2>
+          </div>
+
+          <p>
+            Servicios en un solo lugar.<br />
+            Elige el que mejor se ajuste a tu incidencia.
+          </p>
+        </div>
+
+        <p id="estado-catalogo" role="status" aria-live="polite"></p>
 
         <div id="catalogo" class="services__grid"></div>
-        <p id="estado-catalogo" role="status" aria-live="polite"></p>
       </section>
       <section id="soporte" aria-labelledby="support-title">
         <h2 id="support-title">Solicitud de soporte</h2>

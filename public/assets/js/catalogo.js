@@ -6,21 +6,64 @@ function crearTarjeta(s) {
   const tarjeta = document.createElement('article');
   tarjeta.classList.add('service-card');
 
+  const categoria = document.createElement('span');
+  categoria.classList.add('service-card__category');
+  categoria.textContent = s.categoria;
+
   const titulo = document.createElement('h3');
-  const texto = document.createElement('p');
-  const etiqueta = document.createElement('span');
-
   titulo.textContent = s.nombre;
-  texto.textContent = s.descripcion;
-  etiqueta.textContent = s.categoria + ' · ' + s.prioridad;
 
-  tarjeta.append(titulo, texto, etiqueta);
+  const texto = document.createElement('p');
+  texto.textContent = s.descripcion;
+
+  const prioridad = document.createElement('small');
+  prioridad.textContent = 'Prioridad del servicio: ' + s.prioridad;
+
+  const elegir = document.createElement('button');
+  elegir.type = 'button';
+  elegir.classList.add('service-card__choose');
+  elegir.textContent = 'Elegir ↗';
+
+  elegir.addEventListener('click', () => {
+    selector.value = String(s.id);
+
+    selector.dispatchEvent(
+      new Event('change', {
+        bubbles: true,
+      }),
+    );
+
+    const hero = document.querySelector('#inicio');
+    const servicios = document.querySelector('#servicios');
+    const formulario = document.querySelector('#soporte');
+
+    if (servicios) {
+      servicios.classList.remove('selector-servicios--visible');
+      servicios.hidden = true;
+    }
+
+    if (hero) {
+      hero.hidden = false;
+    }
+
+    if (formulario) {
+      formulario.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  });
+
+  tarjeta.append(categoria, titulo, texto, prioridad, elegir);
+
   return tarjeta;
 }
 
 function validarContrato(lista) {
   const categoriasPermitidas = ['Accesos', 'Hardware', 'Red', 'Software'];
+
   const prioridadesPermitidas = ['alta', 'media', 'baja'];
+
   const ids = new Set();
 
   lista.forEach((servicio) => {
@@ -52,7 +95,9 @@ async function cargarServicios() {
   try {
     const respuesta = await fetch('data/servicios.json');
 
-    if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
+    if (!respuesta.ok) {
+      throw new Error('HTTP ' + respuesta.status);
+    }
 
     const lista = await respuesta.json();
 
@@ -63,6 +108,7 @@ async function cargarServicios() {
     validarContrato(lista);
 
     catalogo.replaceChildren(...lista.map(crearTarjeta));
+
     selector.replaceChildren(new Option('Selecciona un servicio', ''));
 
     lista.forEach((s) => {
@@ -70,6 +116,7 @@ async function cargarServicios() {
     });
 
     selector.disabled = false;
+
     aviso.textContent = lista.length + ' servicios disponibles.';
   } catch (error) {
     catalogo.replaceChildren();
